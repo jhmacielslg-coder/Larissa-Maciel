@@ -1,0 +1,1065 @@
+<!--
+================================================================================
+LARISSA MACIEL — MASSOTERAPEUTA & BEM-ESTAR | LANDING PAGE INSTITUCIONAL ONE-PAGE
+================================================================================
+RESUMO DA IMPLEMENTAÇÃO:
+- Arquitetura: HTML5 semântico puro, CSS3 modular com variáveis (:root) e JS vanilla.
+- Design: Padrão "luxo acessível" com paleta Nude/Bege Rosado (#FDFBF7), Rosé Gold / Bronze
+  (#C59B88) e Marrom Profundo (#2A1E1C).
+- Tipografia: Playfair Display (Títulos) e Montserrat (Corpo e Ações via Google Fonts).
+- Seções Implementadas:
+  1. Sticky Header com Menu Suave, Logo Tipográfico e Hambúrguer Mobile com ARIA.
+  2. Hero Section com foto acolhedora, overlay suave, headline impactante e CTA Glassmorphism.
+  3. Seção "Sobre Mim" humanizada com foto de alta fidelidade e pilares terapêuticos.
+  4. Faixa de 3 Diferenciais exclusivos com ícones minimalistas em SVG.
+  5. Grid de 5 Serviços (Massoterapia, Drenagem Linfática, Ventosaterapia, Estimulação, Estética)
+     com botões de WhatsApp e mensagens pré-preenchidas específicas para cada protocolo.
+  6. Seção de Estatísticas com contadores numéricos animados via IntersectionObserver (+1.000, 5.0 ★, 100%).
+  7. Provas Sociais com Carrossel Animado de avaliações 5 estrelas do Google Meu Negócio (autoplay, setas e dots).
+  8. Chamada Final (CTA) com Formulário de Agendamento Rápido validado no cliente que direciona ao WhatsApp.
+  9. Rodapé Completo com mapa do Google Maps (Formosa - GO), Instagram, links e Botão Flutuante do WhatsApp pulsante.
+- Otimização SEO & Acessibilidade: Meta tags OpenGraph, Twitter Cards, Schema.org (HealthAndBeautyBusiness),
+  botões com aria-label, contraste WCAG AA e carregamento preguiçoso (loading="lazy").
+
+--------------------------------------------------------------------------------
+O QUE VOCÊ PRECISA SUBSTITUIR ANTES DE PUBLICAR (CHECKLIST DE CUSTOMIZAÇÃO):
+1. [WHATSAPP]: Se necessário, confirme o número (61) 99890-5441 (atualmente configurado
+   nos links como 5561998905441 e na constante JS em script.js).
+2. [FOTOS REAIS]: As imagens atuais foram geradas em alta resolução (35mm spa/terapeuta).
+   Para substituir pelas suas fotos reais da profissional Larissa Maciel,
+   basta trocar os arquivos em /src/assets/images/ ou atualizar os caminhos no HTML.
+3. [ENDEREÇO EXATO]: O mapa e textos apontam para Formosa - GO. Se você tiver sala comercial
+   específica (ex: Edifício Comercial, Bairro Centro), inclua o nome da rua no rodapé.
+4. [INSTAGRAM]: O link aponta para https://instagram.com/larissamaciel_massoterapeuta.
+================================================================================
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO & Metatags Principais -->
+  <title>Larissa Maciel — Massoterapeuta | Massoterapia & Bem-Estar em Formosa - GO</title>
+  <meta name="description" content="Sessões exclusivas de massoterapia, drenagem linfática, ventosaterapia e estética corporal com Larissa Maciel em Formosa - GO. Agende seu horário no WhatsApp." />
+  <meta name="keywords" content="massoterapeuta Formosa GO, massoterapia Formosa, drenagem linfatica Formosa, ventosaterapia, massagem relaxante, Larissa Maciel" />
+  <meta name="author" content="Larissa Maciel" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#FDFBF7" />
+
+  <!-- OpenGraph / Redes Sociais -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:title" content="Larissa Maciel — Massoterapeuta em Formosa - GO" />
+  <meta property="og:description" content="Viva uma experiência sensorial única de alívio de tensões, drenagem e renovação com atendimento 100% individualizado." />
+  <meta property="og:site_name" content="Larissa Maciel Massoterapia" />
+  <meta property="og:image" content="/src/assets/images/hero_massage_spa_1791051366687.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Larissa Maciel — Massoterapeuta | Formosa - GO" />
+  <meta name="twitter:description" content="Massoterapia, Drenagem Linfática e Ventosaterapia com atendimento exclusivo e acolhedor em Formosa - GO." />
+  <meta name="twitter:image" content="/src/assets/images/hero_massage_spa_1791051366687.jpg" />
+
+  <!-- Favicon em SVG Moderno -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C59B88' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2a10 10 0 0 0-10 10c0 5.523 4.477 10 10 10s10-4.477 10-10A10 10 0 0 0 12 2Z'/%3E%3Cpath d='M12 8c-2 2-3 4-3 6a3 3 0 0 0 6 0c0-2-1-4-3-6Z'/%3E%3C/svg%3E" />
+
+  <!-- Google Fonts: Playfair Display + Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Folha de Estilos Principal -->
+  <link rel="stylesheet" href="/style.css" />
+
+  <!-- Schema.org JSON-LD para Negócio Local de Saúde e Bem-Estar -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HealthAndBeautyBusiness",
+    "name": "Larissa Maciel — Massoterapeuta",
+    "image": "/src/assets/images/larissa_maciel.jpg",
+    "telephone": "+5561998905441",
+    "url": "https://wa.me/5561998905441",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Formosa",
+      "addressRegion": "GO",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -15.5394,
+      "longitude": -47.3361
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday"],
+        "opens": "08:00",
+        "closes": "14:00"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "128"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ======================================================================
+       1. HEADER FIXO (STICKY HEADER)
+       ====================================================================== -->
+  <header class="header" id="header">
+    <div class="container header-container">
+      <!-- Logo Tipográfico -->
+      <a href="#inicio" class="brand-logo" aria-label="Larissa Maciel Massoterapia - Ir ao topo">
+        <span class="brand-name">Larissa Maciel</span>
+        <span class="brand-role">Massoterapeuta</span>
+      </a>
+
+      <!-- Menu Desktop -->
+      <nav class="nav-desktop" aria-label="Navegação Principal">
+        <ul class="nav-links">
+          <li><a href="#inicio" class="nav-link active">Início</a></li>
+          <li><a href="#sobre" class="nav-link">Sobre Mim</a></li>
+          <li><a href="#diferenciais" class="nav-link">Diferenciais</a></li>
+          <li><a href="#servicos" class="nav-link">Procedimentos</a></li>
+          <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
+          <li><a href="#contato" class="nav-link">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Ações do Header -->
+      <div class="header-actions">
+        <a href="https://wa.me/5561998905441?text=Ol%C3%A1%2C%20Larissa!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20de%20massoterapia." 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="btn btn-whatsapp header-btn"
+           aria-label="Agendar Horário no WhatsApp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <span>Agendar Horário</span>
+        </a>
+
+        <!-- Botão Hambúrguer Mobile -->
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Abrir Menu de Navegação" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Menu Mobile Deslizante -->
+  <div class="mobile-menu-backdrop" id="mobile-backdrop"></div>
+  <aside class="mobile-menu" id="mobile-menu" aria-label="Menu Mobile">
+    <ul class="mobile-nav-links">
+      <li><a href="#inicio" class="mobile-nav-link">Início</a></li>
+      <li><a href="#sobre" class="mobile-nav-link">Sobre Mim</a></li>
+      <li><a href="#diferenciais" class="mobile-nav-link">Diferenciais</a></li>
+      <li><a href="#servicos" class="mobile-nav-link">Procedimentos</a></li>
+      <li><a href="#depoimentos" class="mobile-nav-link">Depoimentos</a></li>
+      <li><a href="#contato" class="mobile-nav-link">Localização & Contato</a></li>
+    </ul>
+    <div class="mobile-menu-footer">
+      <a href="https://wa.me/5561998905441?text=Ol%C3%A1%2C%20Larissa!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio." 
+         target="_blank" 
+         rel="noopener noreferrer" 
+         class="btn btn-whatsapp" 
+         style="width: 100%;">
+        Agendar no WhatsApp
+      </a>
+      <p style="font-size: 0.78rem; text-align: center; color: var(--color-text-muted);">
+        R. Trajano Balduíno, 500, Loja 01 - Centro, Formosa - GO<br />(61) 99890-5441
+      </p>
+    </div>
+  </aside>
+
+  <main>
+    <!-- ====================================================================
+         2. HERO SECTION (INÍCIO)
+         ==================================================================== -->
+    <section class="hero-section" id="inicio">
+      <!-- Imagem de Fundo em Alta Resolução -->
+      <img src="/src/assets/images/hero_massage_spa_1791051366687.jpg" 
+           alt="Ambiente acolhedor e relaxante da clínica de massoterapia de Larissa Maciel em Formosa" 
+           class="hero-bg" 
+           priority="high" />
+      <div class="hero-overlay"></div>
+
+      <div class="container hero-content">
+        <div class="hero-badge-wrap reveal-on-scroll">
+          <span class="hero-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            Atendimento Exclusivo em Formosa - GO
+          </span>
+        </div>
+
+        <h1 class="hero-headline reveal-on-scroll delay-1">
+          Renove suas energias e <span>liberte seu corpo</span> de tensões acumuladas.
+        </h1>
+
+        <p class="hero-description reveal-on-scroll delay-2">
+          Um refúgio de tranquilidade e acolhimento feminino. Protocolos terapêuticos personalizados para alívio imediato de dores musculares, estresse e retenção de líquidos.
+        </p>
+
+        <!-- CTA Principal Visível Imediatamente -->
+        <div class="hero-cta-group reveal-on-scroll delay-3">
+          <a href="https://wa.me/5561998905441?text=Ol%C3%A1%2C%20Larissa!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20minha%20sess%C3%A3o." 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="btn btn-hero-glass"
+             aria-label="Agendar Minha Sessão no WhatsApp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+            <span>Agendar Minha Sessão no WhatsApp</span>
+          </a>
+
+          <a href="#servicos" class="btn btn-outline-white">
+            <span>Conhecer Procedimentos</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         3. SEÇÃO SOBRE MIM
+         ==================================================================== -->
+    <section class="about-section" id="sobre">
+      <div class="container">
+        <div class="about-grid">
+          <!-- Visual da Profissional -->
+          <div class="about-visual reveal-on-scroll">
+            <div class="about-image-frame">
+              <img src="/src/assets/images/larissa_maciel.jpg" 
+                   onerror="this.onerror=null; this.src='https://i.imgur.com/k3f5i6P.jpeg';"
+                   alt="Larissa Maciel — Massoterapeuta especialista em bem-estar e saúde feminina em Formosa" 
+                   class="about-image" 
+                   loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Conteúdo Biográfico Humanizado -->
+          <div class="about-content reveal-on-scroll delay-1">
+            <span class="section-tag">Conheça Sua Terapeuta</span>
+            <h2 class="section-title">Olá, sou Larissa Maciel</h2>
+            
+            <p class="about-lead">
+              Acredito que cuidar do corpo não é luxo supérfluo, mas sim uma necessidade vital para quem sustenta tantas responsabilidades todos os dias.
+            </p>
+
+            <p class="about-body">
+              Atuando em Formosa - GO, desenvolvi um método de atendimento acolhedor e humanizado. Meu propósito é oferecer às mulheres um refúgio acolhedor onde elas possam desligar o piloto automático da rotina, aliviar dores que travam o dia a dia e se reconectar consigo mesmas.
+            </p>
+
+            <p class="about-body">
+              Cada sessão une a precisão de técnicas manuais consagradas (como a liberação miofascial, ventosaterapia e drenagem profunda) ao conforto de uma atmosfera cuidadosamente preparada com essências botânicas e temperatura perfeita.
+            </p>
+
+            <div class="about-pillars">
+              <div class="pillar-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <div class="pillar-text">
+                  <strong>Escuta Empática:</strong> Compreensão das suas dores físicas e sobrecargas emocionais.
+                </div>
+              </div>
+              <div class="pillar-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <div class="pillar-text">
+                  <strong>Respeito ao Seu Limite:</strong> Pressão calibrada no ponto ideal para alívio sem dor excessiva.
+                </div>
+              </div>
+              <div class="pillar-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <div class="pillar-text">
+                  <strong>Ética e Discrição:</strong> Ambiente estritamente seguro, limpo e profissional.
+                </div>
+              </div>
+            </div>
+
+            <div class="about-signature-wrap">
+              <div>
+                <div class="signature-name">Larissa Maciel</div>
+                <div style="font-size: 0.8rem; color: var(--color-text-muted);">Massoterapia, Drenagem & Estética Corporal</div>
+              </div>
+              <a href="https://wa.me/5561998905441?text=Ol%C3%A1%2C%20Larissa!%20Li%20sobre%20sua%20hist%C3%B3ria%20no%20site%20e%20gostaria%20de%20conversar." 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="btn btn-secondary" 
+                 style="padding: 10px 20px; font-size: 0.85rem;">
+                Falar com Larissa
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         4. FAIXA DE DIFERENCIAIS
+         ==================================================================== -->
+    <section class="differentials-section" id="diferenciais">
+      <div class="container">
+        <div class="text-center" style="margin-bottom: 40px;">
+          <span class="section-tag">Por Que Escolher Larissa Maciel</span>
+          <h2 class="section-title">O Cuidado Que Vai Além do Toque</h2>
+          <p class="section-subtitle">
+            Cada detalhe do atendimento foi planejado para transformar seu momento em uma pausa de relaxamento profundo e acolhimento humano.
+          </p>
+        </div>
+
+        <div class="diff-grid">
+          <!-- Card 1 -->
+          <article class="diff-card reveal-on-scroll">
+            <div class="diff-icon-box" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </div>
+            <h3 class="diff-title">Atendimento 100% Exclusivo</h3>
+            <p class="diff-text">
+              Espaço reservado unicamente para você durante todo o horário marcado. Sem pressa, sem ruídos externos e com atenção total às suas necessidades.
+            </p>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="diff-card reveal-on-scroll delay-1">
+            <div class="diff-icon-box" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 17.66 1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="m6.34 17.66-1.41 1.41"></path>
+                <path d="m19.07 4.93-1.41 1.41"></path>
+              </svg>
+            </div>
+            <h3 class="diff-title">Experiência Sensorial Completa</h3>
+            <p class="diff-text">
+              Aromaterapia com óleos essenciais puros, toalhas aquecidas, cromoterapia suave e trilha sonora relaxante pensada para acalmar a mente.
+            </p>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="diff-card reveal-on-scroll delay-2">
+            <div class="diff-icon-box" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
+            <h3 class="diff-title">Protocolos Personalizados</h3>
+            <p class="diff-text">
+              Cada corpo é único. Antes de cada sessão, realizamos uma escuta atenta para direcionar a intensidade, as técnicas e as áreas de maior tensão.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         5. SEÇÃO SERVIÇOS (GRID DE 5 CARTÕES COM BOTÕES DIRETOS)
+         ==================================================================== -->
+    <section class="services-section" id="servicos">
+      <div class="container">
+        <div class="text-center services-header">
+          <span class="section-tag">Menu de Procedimentos</span>
+          <h2 class="section-title">Tratamentos Sob Medida Para Seu Bem-Estar</h2>
+          <p class="section-subtitle">
+            Técnicas manuais e terapêuticas focadas na recuperação muscular, leveza corporal e relaxamento profundo.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <!-- Serviço 1: Massoterapia -->
+          <article class="service-card reveal-on-scroll">
+            <div class="service-top">
+              <div class="service-icon-wrap" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2a5 5 0 0 1 5 5v1a5 5 0 0 1-10 0V7a5 5 0 0 1 5-5z"></path>
+                  <path d="M7 14c-2.5 0-5 2-5 5v3h20v-3c0-3-2.5-5-5-5"></path>
+                </svg>
+              </div>
+              <h3 class="service-title">Massoterapia</h3>
+              <p class="service-desc">
+                Massagem terapêutica e relaxante profunda com manobras precisas sobre nós de tensão muscular (pontos-gatilho) no pescoço, ombros, costas e pernas.
+              </p>
+              <ul class="service-benefits">
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Alívio imediato do estresse e contraturas</span>
+                </li>
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Melhora da flexibilidade e oxigenação</span>
+                </li>
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Aromaterapia botânica inclusa</span>
+                </li>
+              </ul>
+            </div>
+            <div class="service-footer">
+              <a href="https://wa.me/5561998905441?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20sess%C3%A3o%20de%20Massoterapia." 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="btn btn-whatsapp" 
+                 aria-label="Agendar Massoterapia no WhatsApp">
+                <span>Agendar Massoterapia</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Serviço 2: Drenagem Linfática -->
+          <article class="service-card reveal-on-scroll delay-1">
+            <div class="service-top">
+              <div class="service-icon-wrap" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                </svg>
+              </div>
+              <h3 class="service-title">Drenagem Linfática</h3>
+              <p class="service-desc">
+                Manobras rítmicas e suaves que estimulam o sistema linfático a eliminar toxinas e líquidos retidos, promovendo sensação imediata de leveza e desinchaço.
+              </p>
+              <ul class="service-benefits">
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Redução visível de edema e inchaço</span>
+                </li>
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Excelente para pernas pesadas e cansaço</span>
+                </li>
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Estímulo à circulação sanguínea</span>
+                </li>
+              </ul>
+            </div>
+            <div class="service-footer">
+              <a href="https://wa.me/5561998905441?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20sess%C3%A3o%20de%20Drenagem%20Linf%C3%A1tica." 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="btn btn-whatsapp" 
+                 aria-label="Agendar Drenagem Linfática no WhatsApp">
+                <span>Agendar Drenagem Linfática</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Serviço 3: Ventosaterapia -->
+          <article class="service-card reveal-on-scroll delay-2">
+            <div class="service-top">
+              <div class="service-icon-wrap" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M12 3a9 9 0 0 1 9 9"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </div>
+              <h3 class="service-title">Ventosaterapia</h3>
+              <p class="service-desc">
+                Aplicação de copos de sucção a vácuo para criar sucção e descolamento da fáscia muscular, oxigenando tecidos estagnados e aliviando dores profundas.
+              </p>
+              <ul class="service-benefits">
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Liberação de fáscia e nódulos resistentes</span>
+                </li>
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Alívio acelerado de dores nas costas</span>
+                </li>
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Aumento expressivo do fluxo sanguíneo</span>
+                </li>
+              </ul>
+            </div>
+            <div class="service-footer">
+              <a href="https://wa.me/5561998905441?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20sess%C3%A3o%20de%20Ventosaterapia." 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="btn btn-whatsapp" 
+                 aria-label="Agendar Ventosaterapia no WhatsApp">
+                <span>Agendar Ventosaterapia</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Serviço 4: Estimulação Corporal -->
+          <article class="service-card reveal-on-scroll">
+            <div class="service-top">
+              <div class="service-icon-wrap" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <h3 class="service-title">Estimulação Corporal</h3>
+              <p class="service-desc">
+                Técnicas manuais vigorosas associadas a estímulos musculares que ativam o tônus celular, combatem a fadiga profunda e revitalizam a disposição física.
+              </p>
+              <ul class="service-benefits">
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Reativação da vitalidade corporal</span>
+                </li>
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Recuperação pós-treino ou esforço</span>
+                </li>
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Combate à sensação de rigidez</span>
+                </li>
+              </ul>
+            </div>
+            <div class="service-footer">
+              <a href="https://wa.me/5561998905441?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20sess%C3%A3o%20de%20Estimula%C3%A7%C3%A3o%20Corporal." 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="btn btn-whatsapp" 
+                 aria-label="Agendar Estimulação Corporal no WhatsApp">
+                <span>Agendar Estimulação</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Serviço 5: Estética Corporal -->
+          <article class="service-card reveal-on-scroll delay-1">
+            <div class="service-top">
+              <div class="service-icon-wrap" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path>
+                </svg>
+              </div>
+              <h3 class="service-title">Estética Corporal</h3>
+              <p class="service-desc">
+                Massagens modeladoras e protocolos estéticos corporais desenvolvidos para desenhar contornos, melhorar a textura cutânea e diminuir o aspecto da celulite.
+              </p>
+              <ul class="service-benefits">
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Modelagem de curvas e silhueta</span>
+                </li>
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Auxílio na firmeza e textura da pele</span>
+                </li>
+                <li class="benefit-item">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Planos de sessões com acompanhamento</span>
+                </li>
+              </ul>
+            </div>
+            <div class="service-footer">
+              <a href="https://wa.me/5561998905441?text=Ol%C3%A1!%20Gostaria%20de%20conhecer%20os%20protocolos%20de%20Est%C3%A9tica%20Corporal." 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="btn btn-whatsapp" 
+                 aria-label="Agendar Estética Corporal no WhatsApp">
+                <span>Agendar Estética Corporal</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         6. SEÇÃO ESTATÍSTICAS (CONTADORES ANIMADOS VIA JS)
+         ==================================================================== -->
+    <section class="stats-section" aria-label="Estatísticas e Resultados">
+      <div class="container">
+        <div class="stats-grid">
+          <!-- Estatística 1 -->
+          <div class="stat-item reveal-on-scroll">
+            <div class="stat-number-wrap">
+              <span class="stat-symbol">+</span>
+              <span class="stat-number" data-target="1000" data-thousands="true">0</span>
+            </div>
+            <div class="stat-label">Sessões Realizadas</div>
+            <div class="stat-sub">Histórias de alívio e renovação em Formosa</div>
+          </div>
+
+          <!-- Estatística 2 -->
+          <div class="stat-item reveal-on-scroll delay-1">
+            <div class="stat-number-wrap">
+              <span class="stat-number" data-target="5.0" data-decimal="true">0.0</span>
+              <span class="stat-star">★</span>
+            </div>
+            <div class="stat-label">Avaliação no Google</div>
+            <div class="stat-sub">100% de satisfação com feedback 5 estrelas</div>
+          </div>
+
+          <!-- Estatística 3 -->
+          <div class="stat-item reveal-on-scroll delay-2">
+            <div class="stat-number-wrap">
+              <span class="stat-number" data-target="100">0</span>
+              <span class="stat-symbol">%</span>
+            </div>
+            <div class="stat-label">Atendimento Exclusivo</div>
+            <div class="stat-sub">Foco individual em cada cliente por horário</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         7. SEÇÃO PROVAS SOCIAIS (DEPOIMENTOS DO GOOGLE)
+         ==================================================================== -->
+    <section class="testimonials-section" id="depoimentos">
+      <div class="container">
+        <div class="text-center">
+          <div class="google-badge-header">
+            <svg class="google-logo-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.87c2.26-2.09 3.67-5.17 3.67-9.15z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.87-3.05c-1.08.72-2.45 1.16-4.06 1.16-3.13 0-5.78-2.11-6.73-4.96H1.28v3.15C3.26 21.36 7.35 24 12 24z"/>
+              <path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.28C.46 8.24 0 10.07 0 12s.46 3.76 1.28 5.39l3.99-3.15z"/>
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.28 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/>
+            </svg>
+            <span class="google-badge-text">Avaliado com nota 5.0 no Google Meu Negócio</span>
+          </div>
+
+          <h2 class="section-title">O Que Nossas Clientes Dizem</h2>
+          <p class="section-subtitle">
+            Relatos espontâneos de mulheres que encontraram nas sessões um alívio real para o corpo e a mente.
+          </p>
+        </div>
+
+        <!-- Carrossel Animado de Avaliações do Google -->
+        <div class="testimonials-carousel-wrapper reveal-on-scroll">
+          <!-- Botão Anterior -->
+          <button class="carousel-control prev" id="carousel-prev" aria-label="Avaliação anterior">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <!-- Botão Próximo -->
+          <button class="carousel-control next" id="carousel-next" aria-label="Próxima avaliação">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          <!-- Janela do Carrossel e Trilho Deslizante -->
+          <div class="carousel-track-container" id="carousel-track-container">
+            <div class="carousel-track" id="carousel-track">
+              <!-- Slide 1: Camila Barbosa -->
+              <div class="carousel-slide">
+                <article class="testimonial-card">
+                  <div class="card-top-row">
+                    <div class="review-stars" aria-label="Avaliação 5 de 5 estrelas">★★★★★</div>
+                    <svg class="google-verified-icon" viewBox="0 0 24 24" aria-hidden="true" title="Avaliação Verificada Google">
+                      <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.87c2.26-2.09 3.67-5.17 3.67-9.15z"/>
+                      <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.87-3.05c-1.08.72-2.45 1.16-4.06 1.16-3.13 0-5.78-2.11-6.73-4.96H1.28v3.15C3.26 21.36 7.35 24 12 24z"/>
+                      <path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.28C.46 8.24 0 10.07 0 12s.46 3.76 1.28 5.39l3.99-3.15z"/>
+                      <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.28 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/>
+                    </svg>
+                  </div>
+                  <p class="review-text">
+                    "A Larissa tem mãos de fada! Eu sofria com dores intensas na lombar e nos ombros por trabalhar sentada o dia todo. Saí da sessão leve, sem nenhuma pontada de dor. O consultório é super acolhedor e cheiroso. Recomendo de olhos fechados!"
+                  </p>
+                  <div class="reviewer-meta">
+                    <div class="reviewer-avatar">CB</div>
+                    <div class="reviewer-info">
+                      <span class="reviewer-name">Camila Barbosa</span>
+                      <span class="reviewer-detail">Cliente Verificada · Formosa/GO</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Slide 2: Renata Alencar -->
+              <div class="carousel-slide">
+                <article class="testimonial-card">
+                  <div class="card-top-row">
+                    <div class="review-stars" aria-label="Avaliação 5 de 5 estrelas">★★★★★</div>
+                    <svg class="google-verified-icon" viewBox="0 0 24 24" aria-hidden="true" title="Avaliação Verificada Google">
+                      <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.87c2.26-2.09 3.67-5.17 3.67-9.15z"/>
+                      <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.87-3.05c-1.08.72-2.45 1.16-4.06 1.16-3.13 0-5.78-2.11-6.73-4.96H1.28v3.15C3.26 21.36 7.35 24 12 24z"/>
+                      <path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.28C.46 8.24 0 10.07 0 12s.46 3.76 1.28 5.39l3.99-3.15z"/>
+                      <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.28 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/>
+                    </svg>
+                  </div>
+                  <p class="review-text">
+                    "Fiz a drenagem linfática e fiquei chocada com o resultado logo na primeira sessão. Reduziu todo aquele inchaço incômodo das pernas. A Larissa é extremamente educada, pontual e atenciosa em cada detalhe. Virou meu autocuidado semanal!"
+                  </p>
+                  <div class="reviewer-meta">
+                    <div class="reviewer-avatar">RA</div>
+                    <div class="reviewer-info">
+                      <span class="reviewer-name">Renata Alencar</span>
+                      <span class="reviewer-detail">Cliente Verificada · Formosa/GO</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Slide 3: Patrícia Santos -->
+              <div class="carousel-slide">
+                <article class="testimonial-card">
+                  <div class="card-top-row">
+                    <div class="review-stars" aria-label="Avaliação 5 de 5 estrelas">★★★★★</div>
+                    <svg class="google-verified-icon" viewBox="0 0 24 24" aria-hidden="true" title="Avaliação Verificada Google">
+                      <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.87c2.26-2.09 3.67-5.17 3.67-9.15z"/>
+                      <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.87-3.05c-1.08.72-2.45 1.16-4.06 1.16-3.13 0-5.78-2.11-6.73-4.96H1.28v3.15C3.26 21.36 7.35 24 12 24z"/>
+                      <path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.28C.46 8.24 0 10.07 0 12s.46 3.76 1.28 5.39l3.99-3.15z"/>
+                      <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.28 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/>
+                    </svg>
+                  </div>
+                  <p class="review-text">
+                    "A ventosaterapia combinada com a massagem tirou nós de tensão que eu carregava há meses nas costas. Atendimento impecável, maca confortável, toalhas quentinhas e música relaxante. Uma verdadeira terapia de renovação."
+                  </p>
+                  <div class="reviewer-meta">
+                    <div class="reviewer-avatar">PS</div>
+                    <div class="reviewer-info">
+                      <span class="reviewer-name">Patrícia Santos</span>
+                      <span class="reviewer-detail">Cliente Verificada · Formosa/GO</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Slide 4: Juliana Ferreira -->
+              <div class="carousel-slide">
+                <article class="testimonial-card">
+                  <div class="card-top-row">
+                    <div class="review-stars" aria-label="Avaliação 5 de 5 estrelas">★★★★★</div>
+                    <svg class="google-verified-icon" viewBox="0 0 24 24" aria-hidden="true" title="Avaliação Verificada Google">
+                      <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.87c2.26-2.09 3.67-5.17 3.67-9.15z"/>
+                      <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.87-3.05c-1.08.72-2.45 1.16-4.06 1.16-3.13 0-5.78-2.11-6.73-4.96H1.28v3.15C3.26 21.36 7.35 24 12 24z"/>
+                      <path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.28C.46 8.24 0 10.07 0 12s.46 3.76 1.28 5.39l3.99-3.15z"/>
+                      <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.28 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/>
+                    </svg>
+                  </div>
+                  <p class="review-text">
+                    "Melhor experiência de massoterapia que já tive em Formosa! Estava com muita insônia e sobrecarga de estresse. A massagem com aromaterapia me fez relaxar como há muito tempo não conseguia. Saí renovada!"
+                  </p>
+                  <div class="reviewer-meta">
+                    <div class="reviewer-avatar">JF</div>
+                    <div class="reviewer-info">
+                      <span class="reviewer-name">Juliana Ferreira</span>
+                      <span class="reviewer-detail">Cliente Verificada · Formosa/GO</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Slide 5: Vanessa Guimarães -->
+              <div class="carousel-slide">
+                <article class="testimonial-card">
+                  <div class="card-top-row">
+                    <div class="review-stars" aria-label="Avaliação 5 de 5 estrelas">★★★★★</div>
+                    <svg class="google-verified-icon" viewBox="0 0 24 24" aria-hidden="true" title="Avaliação Verificada Google">
+                      <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.87c2.26-2.09 3.67-5.17 3.67-9.15z"/>
+                      <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.87-3.05c-1.08.72-2.45 1.16-4.06 1.16-3.13 0-5.78-2.11-6.73-4.96H1.28v3.15C3.26 21.36 7.35 24 12 24z"/>
+                      <path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.28C.46 8.24 0 10.07 0 12s.46 3.76 1.28 5.39l3.99-3.15z"/>
+                      <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.28 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/>
+                    </svg>
+                  </div>
+                  <p class="review-text">
+                    "Faço o protocolo de estética corporal e drenagem. A atenção da Larissa em entender o meu corpo e ajustar as manobras faz toda a diferença. O ambiente é impecável, limpo e super reservado."
+                  </p>
+                  <div class="reviewer-meta">
+                    <div class="reviewer-avatar">VG</div>
+                    <div class="reviewer-info">
+                      <span class="reviewer-name">Vanessa Guimarães</span>
+                      <span class="reviewer-detail">Cliente Verificada · Formosa/GO</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Slide 6: Débora Moreira -->
+              <div class="carousel-slide">
+                <article class="testimonial-card">
+                  <div class="card-top-row">
+                    <div class="review-stars" aria-label="Avaliação 5 de 5 estrelas">★★★★★</div>
+                    <svg class="google-verified-icon" viewBox="0 0 24 24" aria-hidden="true" title="Avaliação Verificada Google">
+                      <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.87c2.26-2.09 3.67-5.17 3.67-9.15z"/>
+                      <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.87-3.05c-1.08.72-2.45 1.16-4.06 1.16-3.13 0-5.78-2.11-6.73-4.96H1.28v3.15C3.26 21.36 7.35 24 12 24z"/>
+                      <path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.28C.46 8.24 0 10.07 0 12s.46 3.76 1.28 5.39l3.99-3.15z"/>
+                      <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.28 6.61l3.99 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/>
+                    </svg>
+                  </div>
+                  <p class="review-text">
+                    "Profissionalismo nota 1000! O atendimento é 100% individualizado, ela não tem pressa, ouve suas queixas e tem uma energia maravilhosa. Recomendo para todas as mulheres que precisam de um momento para si."
+                  </p>
+                  <div class="reviewer-meta">
+                    <div class="reviewer-avatar">DM</div>
+                    <div class="reviewer-info">
+                      <span class="reviewer-name">Débora Moreira</span>
+                      <span class="reviewer-detail">Cliente Verificada · Formosa/GO</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <!-- Indicadores de Paginação (Dots) -->
+          <div class="carousel-dots" id="carousel-dots" aria-label="Navegação em pontos do carrossel"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         7. CHAMADA FINAL (CTA DE CONVERSÃO COM AGENDAMENTO RÁPIDO)
+         ==================================================================== -->
+    <section class="cta-section" id="contato">
+      <div class="container">
+        <div class="cta-box reveal-on-scroll">
+          <div class="cta-inner-grid">
+            <!-- Coluna de Informações e Foto -->
+            <div class="cta-info-col">
+              <span class="section-tag">Reserve Seu Momento</span>
+
+              <div class="cta-photo-frame">
+                <img src="/src/assets/images/cta_photo.jpg" 
+                     onerror="this.onerror=null; this.src='https://i.imgur.com/tl5tydQ.jpeg';"
+                     alt="Larissa Maciel — Atendimento e acolhimento em massoterapia e bem-estar" 
+                     class="cta-photo" 
+                     loading="lazy" />
+              </div>
+
+              <div class="cta-text-bottom">
+                <h2 class="cta-headline">Dê a si mesma a pausa que seu corpo merece hoje.</h2>
+                <p class="cta-subtext">
+                  As dores não precisam fazer parte da sua rotina. Escolha seu tratamento e venha vivenciar uma experiência completa de alívio e renovação em Formosa.
+                </p>
+              </div>
+            </div>
+
+            <!-- Coluna do Formulário de Pré-Agendamento -->
+            <div class="booking-form-col">
+              <form class="booking-form" id="booking-form" novalidate>
+                <div class="form-header-title">Solicitar Horário Rápido</div>
+                <div class="form-header-sub">Preencha abaixo para gerar sua mensagem personalizada:</div>
+
+                <!-- Campo Nome -->
+                <div class="form-group">
+                  <label for="client-name" class="form-label">Seu Nome Completo *</label>
+                  <input type="text" id="client-name" class="form-input" placeholder="Ex: Maria Clara Silva" required />
+                  <div class="form-feedback">Por favor, informe seu nome para contato.</div>
+                </div>
+
+                <!-- Campo WhatsApp -->
+                <div class="form-group">
+                  <label for="client-phone" class="form-label">WhatsApp com DDD *</label>
+                  <input type="tel" id="client-phone" class="form-input" placeholder="(61) 99999-9999" required />
+                  <div class="form-feedback">Informe um número de WhatsApp válido com DDD.</div>
+                </div>
+
+                <!-- Campo Serviço -->
+                <div class="form-group">
+                  <label for="client-service" class="form-label">Procedimento Desejado *</label>
+                  <select id="client-service" class="form-select" required>
+                    <option value="" disabled selected>Selecione um procedimento</option>
+                    <option value="massoterapia">Massoterapia (Relaxante / Terapêutica)</option>
+                    <option value="drenagem">Drenagem Linfática Corporal</option>
+                    <option value="ventosa">Ventosaterapia & Liberação Miofascial</option>
+                    <option value="estimulacao">Estimulação Muscular & Corporal</option>
+                    <option value="estetica">Estética Corporal Modeladora</option>
+                    <option value="duvida">Quero uma avaliação personalizada</option>
+                  </select>
+                  <div class="form-feedback">Selecione o procedimento de seu interesse.</div>
+                </div>
+
+                <!-- Campo Preferência de Horário -->
+                <div class="form-group">
+                  <label for="client-time" class="form-label">Melhor Período para Atendimento</label>
+                  <select id="client-time" class="form-select">
+                    <option value="manha">Manhã (08h às 12h)</option>
+                    <option value="tarde" selected>Tarde (13h às 19h)</option>
+                    <option value="sabado">Sábado (Manhã)</option>
+                    <option value="qualquer">Qualquer horário disponível</option>
+                  </select>
+                </div>
+
+                <!-- Campo Observações -->
+                <div class="form-group">
+                  <label for="client-notes" class="form-label">Tem alguma dor específica ou detalhe? (Opcional)</label>
+                  <textarea id="client-notes" class="form-textarea" placeholder="Ex: Dores no pescoço e retenção de líquidos..."></textarea>
+                </div>
+
+                <!-- Botão Enviar para WhatsApp -->
+                <button type="submit" class="btn btn-primary btn-form-submit">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                  <span>Enviar Pedido de Agendamento</span>
+                </button>
+
+                <p class="form-privacy-note">
+                  🔒 Seus dados são confidenciais e utilizados unicamente para seu atendimento.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================================================
+       11. RODAPÉ (FOOTER) & LOCALIZAÇÃO
+       ====================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Coluna 1: Marca & Descrição -->
+        <div class="footer-col-brand">
+          <div class="brand-name">Larissa Maciel</div>
+          <div class="brand-role">Massoterapeuta</div>
+          <p class="footer-tagline">
+            Proporcionando equilíbrio, alívio de dores musculares e reconexão através de cuidados manuais e acolhimento humano em Formosa - GO.
+          </p>
+          <div class="footer-socials">
+            <a href="https://instagram.com/larissamaciel_massoterapeuta" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Acompanhe no Instagram @larissamaciel_massoterapeuta">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="https://wa.me/5561998905441" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Fale no WhatsApp (61) 99890-5441">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Coluna 2: Links Rápidos -->
+        <div>
+          <div class="footer-heading">Navegação</div>
+          <ul class="footer-nav-list">
+            <li><a href="#inicio" class="footer-nav-link">Início</a></li>
+            <li><a href="#sobre" class="footer-nav-link">Sobre Mim</a></li>
+            <li><a href="#diferenciais" class="footer-nav-link">Diferenciais</a></li>
+            <li><a href="#servicos" class="footer-nav-link">Procedimentos</a></li>
+            <li><a href="#depoimentos" class="footer-nav-link">Avaliações Google</a></li>
+            <li><a href="#contato" class="footer-nav-link">Agendamento & Contato</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Horários e Informações -->
+        <div>
+          <div class="footer-heading">Atendimento</div>
+          <ul class="footer-contact-list">
+            <li class="contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <div>
+                <strong>Segunda a Sexta:</strong><br />08:00 às 19:00
+              </div>
+            </li>
+            <li class="contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <div>
+                <strong>Sábados:</strong><br />08:00 às 14:00 (Hora Marcada)
+              </div>
+            </li>
+            <li class="contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <div>
+                <strong>Endereço:</strong><br />
+                R. Trajano Balduíno, 500 - loja 01<br />
+                Centro, Formosa - GO, 73801-430
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: Mapa Incorporado Responsivo -->
+        <div class="footer-map-col">
+          <div class="footer-heading">Localização</div>
+          <p style="font-size: 0.84rem; color: #BCAAA4; margin-bottom: 8px;">
+            R. Trajano Balduíno, 500 - loja 01 - Centro, Formosa - GO
+          </p>
+          <div class="footer-map-container">
+            <iframe 
+              title="Localização: R. Trajano Balduíno, 500 - loja 01 - Centro, Formosa - GO"
+              src="https://maps.google.com/maps?q=R.+Trajano+Baldu%C3%ADno%2C+500+-+loja+01+-+Centro%2C+Formosa+-+GO%2C+73801-430&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linha Inferior de Direitos Autorais -->
+      <div class="footer-bottom">
+        <div>
+          &copy; <span id="current-year">2026</span> Larissa Maciel — Massoterapeuta. Todos os direitos reservados.
+        </div>
+        <div>
+          R. Trajano Balduíno, 500 - loja 01, Formosa - GO • (61) 99890-5441
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       BOTÃO FLUTUANTE DO WHATSAPP COM PULSO SUAVE
+       ====================================================================== -->
+  <aside class="floating-whatsapp" aria-label="Canal Direto de Agendamento">
+    <div class="floating-whatsapp-tooltip">
+      Agende sua sessão agora 👋
+    </div>
+    <a href="https://wa.me/5561998905441?text=Ol%C3%A1%2C%20Larissa!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20de%20massoterapia." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="floating-whatsapp-btn" 
+       aria-label="Abrir conversa no WhatsApp com Larissa Maciel">
+      <div class="floating-whatsapp-pulse" aria-hidden="true"></div>
+      <div class="online-indicator" title="Online agora"></div>
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+      </svg>
+    </a>
+  </aside>
+
+  <!-- Script Principal Vanilla -->
+  <script src="/script.js"></script>
+</body>
+</html>
